@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Universal AI Exchange Protocol v4.0",
+  "description": "Human-mediated AI communication protocol",
+  "type": "object",
+  "properties": {
+    "protocol_version": {
+      "type": "string",
+      "enum": ["4.0", "3.6", "3.5"],
+      "description": "Protocol version for compatibility"
+    },
+    "message_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique message identifier"
+    },
+    "timestamp": {
+      "type": "string", 
+      "format": "date-time",
+      "description": "ISO 8601 timestamp"
+    },
+    "source_ai": {
+      "type": "string",
+      "description": "Source AI system identifier"
+    },
+    "target_ai": {
+      "type": "string", 
+      "description": "Target AI system identifier"
+    },
+    "priority": {
+      "type": "string",
+      "enum": ["low", "medium", "high", "urgent"],
+      "description": "Message priority level"
+    },
+    "content_type": {
+      "type": "string",
+      "enum": ["query", "response", "error", "handshake"],
+      "description": "Type of message content"
+    },
+    "message_content": {
+      "type": "object",
+      "properties": {
+        "text": {"type": "string"},
+        "structured_data": {"type": "object"},
+        "code_blocks": {"type": "array"},
+        "attachments": {"type": "array"}
+      }
+    },
+    "context": {
+      "type": "object",
+      "properties": {
+        "session_id": {"type": "string"},
+        "previous_message_id": {"type": "string"},
+        "step_number": {"type": "integer"}
+      }
+    },
+    "compression": {
+      "type": "object",
+      "properties": {
+        "enabled": {"type": "boolean"},
+        "algorithm": {"type": "string"},
+        "original_size": {"type": "integer"},
+        "compressed_size": {"type": "integer"}
+      }
+    }
+  },
+  "required": [
+    "protocol_version",
+    "message_id", 
+    "timestamp",
+    "source_ai",
+    "target_ai",
+    "content_type",
+    "message_content"
+  ]
+}

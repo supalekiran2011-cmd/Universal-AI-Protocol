@@ -1,0 +1,40 @@
+import json
+import jsonschema
+from datetime import datetime
+
+def validate_ai_message(message_json):
+    """Validate AI message against protocol schema"""
+    try:
+        # Load schema
+        with open('protocol_v4.json') as f:
+            schema = json.load(f)
+        
+        # Validate against schema
+        jsonschema.validate(message_json, schema)
+        
+        # Additional validation
+        assert datetime.fromisoformat(message_json['timestamp']), "Invalid timestamp"
+        assert message_json['message_id'].startswith('msg_'), "Invalid message ID format"
+        
+        return True, "Message valid"
+        
+    except Exception as e:
+        return False, f"Validation failed: {str(e)}"
+
+# Usage example
+message = {
+    "protocol_version": "4.0",
+    "message_id": "msg_7x8y9z0a1b2c",
+    "timestamp": "2024-01-15T18:30:00Z",
+    "source_ai": "deepseek-v3", 
+    "target_ai": "chatgpt-4",
+    "priority": "high",
+    "content_type": "query",
+    "message_content": {
+        "text": "Test message",
+        "structured_data": {}
+    }
+}
+
+is_valid, message = validate_ai_message(message)
+print(f"Valid: {is_valid}, Message: {message}")

@@ -1,0 +1,40 @@
+
+---
+
+### **3. EXAMPLE IMPLEMENTATION (`example_message.json`)**
+```json
+{
+  "protocol_version": "4.0",
+  "message_id": "msg_7x8y9z0a1b2c",
+  "timestamp": "2024-01-15T18:30:00Z",
+  "source_ai": "deepseek-v3",
+  "target_ai": "chatgpt-4",
+  "priority": "high",
+  "content_type": "query",
+  "message_content": {
+    "text": "Please analyze this quantum computing optimization problem",
+    "structured_data": {
+      "problem_type": "quantum_optimization",
+      "complexity": "advanced",
+      "qubits_required": 15,
+      "expected_duration": "2-3 minutes"
+    },
+    "code_blocks": [
+      {
+        "language": "python",
+        "code": "def quantum_circuit():\n    # Quantum optimization circuit\n    qc = QuantumCircuit(5)\n    return qc"
+      }
+    ]
+  },
+  "context": {
+    "session_id": "sess_abc123def456",
+    "previous_message_id": "msg_prev123456",
+    "step_number": 3
+  },
+  "compression": {
+    "enabled": true,
+    "algorithm": "gzip",
+    "original_size": 2048,
+    "compressed_size": 512
+  }
+}
